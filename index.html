@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Complain About Oligos</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>Complain About Oligos</h1>
+      <p class="tagline">
+        Tell us what's frustrating about ordering or using DNA in your work.
+      </p>
+    </header>
+
+    <form id="complaint-form" novalidate>
+      <div class="field">
+        <label for="segment">Which best describes you?</label>
+        <select id="segment" name="segment" required>
+          <option value="" disabled selected>Choose one…</option>
+          <option value="academic-lab">Academic lab (PI, postdoc, grad student)</option>
+          <option value="core-facility">Core facility staff</option>
+          <option value="biotech-startup">Biotech (startup / small)</option>
+          <option value="biotech-midsize">Biotech (mid-size)</option>
+          <option value="big-pharma">Big pharma</option>
+          <option value="cro">Contract research organization (CRO)</option>
+          <option value="gov-national-lab">Government / national lab</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="category">What's the complaint about?</label>
+        <select id="category" name="category" required>
+          <option value="" disabled selected>Choose one…</option>
+          <option value="price">Price / cost</option>
+          <option value="turnaround">Turnaround time</option>
+          <option value="quality">Sequence quality or errors</option>
+          <option value="complexity-limits">Length, GC, or complexity limits</option>
+          <option value="modifications">Modifications availability or cost</option>
+          <option value="shipping">Shipping / logistics</option>
+          <option value="customer-service">Customer service</option>
+          <option value="qc-docs">QC reports / documentation</option>
+          <option value="moq">Minimum order quantities</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="details">Tell us more</label>
+        <textarea
+          id="details"
+          name="details"
+          rows="6"
+          placeholder="What happened, how often does it happen, what would you want instead?"
+          required
+        ></textarea>
+      </div>
+
+      <button type="submit" class="submit-btn">Submit complaint</button>
+
+      <p class="status" id="status" role="status" aria-live="polite"></p>
+    </form>
+
+    <footer>
+      <p class="disclaimer">
+        <strong>Heads up:</strong> Don't include confidential sequences, unpublished IP,
+        or anything covered by an NDA. Submissions are for product feedback only.
+      </p>
+      <p class="terms">
+        By submitting, you agree your response may be shared anonymously to help
+        improve oligo and DNA-synthesis services. No personally identifying information
+        is collected on this form.
+      </p>
+    </footer>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
