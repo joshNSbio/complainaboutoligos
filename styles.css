@@ -1,13 +1,25 @@
 :root {
-  --bg: #f7f7f5;
+  --bg-1: #eef3ef;
+  --bg-2: #e3ebe5;
   --surface: #ffffff;
-  --text: #1a1a1a;
-  --muted: #5a5a5a;
-  --border: #d8d8d4;
-  --accent: #2b5d4f;
-  --accent-hover: #1f4538;
-  --warning-bg: #fff8e1;
+  --text: #131a16;
+  --muted: #6b756e;
+  --border: #d6dfd8;
+  --border-strong: #b8c5bc;
+  --accent: #1f6f5c;
+  --accent-hover: #154d40;
+  --accent-soft: #e7f2ee;
+  --warning-bg: #fff6d6;
   --warning-border: #e8d77c;
+  --warning-text: #6b4f0a;
+
+  --base-a: #e64545;
+  --base-t: #4a8cef;
+  --base-g: #22a06b;
+  --base-c: #f5b423;
+
+  --shadow-sm: 0 1px 2px rgba(15, 30, 25, 0.06);
+  --shadow-md: 0 10px 30px -12px rgba(15, 30, 25, 0.18), 0 2px 6px rgba(15, 30, 25, 0.05);
 }
 
 * {
@@ -17,45 +29,118 @@
 html, body {
   margin: 0;
   padding: 0;
-  background: var(--bg);
+  min-height: 100%;
   color: var(--text);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   font-size: 16px;
-  line-height: 1.5;
+  line-height: 1.55;
+  background:
+    radial-gradient(1200px 600px at 80% -10%, rgba(34, 160, 107, 0.10), transparent 60%),
+    radial-gradient(900px 500px at -10% 110%, rgba(74, 140, 239, 0.08), transparent 60%),
+    linear-gradient(180deg, var(--bg-1), var(--bg-2));
+  background-attachment: fixed;
 }
 
 .container {
-  max-width: 640px;
+  max-width: 680px;
   margin: 0 auto;
-  padding: 3rem 1.25rem 4rem;
+  padding: 3.5rem 1.25rem 4rem;
+}
+
+/* ----- Header ----- */
+
+header {
+  text-align: center;
+  margin-bottom: 0.5rem;
 }
 
 header h1 {
-  margin: 0 0 0.25rem;
-  font-size: 2rem;
-  letter-spacing: -0.02em;
+  margin: 0 0 0.35rem;
+  font-size: 2.25rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  background: linear-gradient(135deg, #154d40 0%, #1f6f5c 50%, #22a06b 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .tagline {
-  margin: 0 0 2rem;
+  margin: 0;
   color: var(--muted);
+  font-size: 1.02rem;
 }
+
+/* ----- DNA helix banner ----- */
+
+.helix {
+  position: relative;
+  height: 84px;
+  margin: 1.5rem 0 1.75rem;
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+.helix-track {
+  display: flex;
+  width: 200%;
+  animation: helix-pan 14s linear infinite;
+}
+
+.helix-track svg {
+  display: block;
+  height: 84px;
+  width: 50%;
+  flex: 0 0 50%;
+}
+
+.helix-strand {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  opacity: 0.9;
+}
+
+.helix-strand.back {
+  stroke: var(--border-strong);
+  opacity: 0.7;
+}
+
+.helix-rung {
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  opacity: 0.9;
+}
+
+@keyframes helix-pan {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .helix-track { animation: none; }
+}
+
+/* ----- Form card ----- */
 
 form {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 1.5rem;
+  border-radius: 14px;
+  padding: 1.75rem;
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.35rem;
+  box-shadow: var(--shadow-md);
 }
 
 .field {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.45rem;
 }
 
 label {
@@ -69,43 +154,68 @@ textarea {
   color: var(--text);
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 0.6rem 0.7rem;
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
   width: 100%;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+select:hover,
+textarea:hover {
+  border-color: var(--border-strong);
 }
 
 select:focus,
 textarea:focus {
-  outline: 2px solid var(--accent);
-  outline-offset: 1px;
+  outline: none;
   border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(31, 111, 92, 0.18);
 }
 
 textarea {
   resize: vertical;
-  min-height: 7rem;
+  min-height: 7.5rem;
 }
+
+/* ----- Submit button ----- */
 
 .submit-btn {
   font: inherit;
   font-weight: 600;
+  font-size: 1rem;
   color: #fff;
-  background: var(--accent);
   border: none;
-  border-radius: 6px;
-  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
   cursor: pointer;
-  transition: background-color 0.15s ease;
+  background: linear-gradient(180deg, #28876f 0%, var(--accent) 60%, var(--accent-hover) 100%);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.25) inset,
+    0 -2px 0 rgba(0, 0, 0, 0.18) inset,
+    0 6px 14px -6px rgba(31, 111, 92, 0.55);
+  transition: transform 0.08s ease, box-shadow 0.15s ease, filter 0.15s ease;
 }
 
 .submit-btn:hover {
-  background: var(--accent-hover);
+  filter: brightness(1.05);
+}
+
+.submit-btn:active {
+  transform: translateY(1px);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.15) inset,
+    0 -1px 0 rgba(0, 0, 0, 0.18) inset,
+    0 3px 8px -4px rgba(31, 111, 92, 0.55);
 }
 
 .submit-btn:disabled {
-  opacity: 0.6;
+  opacity: 0.7;
   cursor: not-allowed;
+  filter: grayscale(0.2);
 }
+
+/* ----- Status text ----- */
 
 .status {
   margin: 0;
@@ -114,13 +224,10 @@ textarea {
   color: var(--muted);
 }
 
-.status.success {
-  color: var(--accent);
-}
+.status.success { color: var(--accent); font-weight: 600; }
+.status.error   { color: #a83232; font-weight: 600; }
 
-.status.error {
-  color: #a83232;
-}
+/* ----- Footer ----- */
 
 footer {
   margin-top: 1.5rem;
@@ -132,7 +239,8 @@ footer {
 .disclaimer {
   background: var(--warning-bg);
   border: 1px solid var(--warning-border);
-  border-radius: 6px;
+  color: var(--warning-text);
+  border-radius: 8px;
   padding: 0.75rem 0.9rem;
   margin: 0;
   font-size: 0.9rem;
@@ -144,10 +252,122 @@ footer {
   color: var(--muted);
 }
 
+/* ----- Honeypot ----- */
+
 .honeypot {
   position: absolute;
   left: -9999px;
   width: 1px;
   height: 1px;
   overflow: hidden;
+}
+
+/* ----- Achievement banner ----- */
+
+.achievement {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  width: 340px;
+  max-width: calc(100vw - 3rem);
+  padding: 0.85rem 1rem;
+  background: linear-gradient(135deg, #1a1f1c 0%, #2a3530 100%);
+  color: #f5f5f0;
+  border-radius: 12px;
+  border: 1px solid rgba(245, 180, 35, 0.4);
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.4),
+    0 20px 40px -12px rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(245, 180, 35, 0.15);
+  transform: translateX(calc(100% + 2rem));
+  opacity: 0;
+  pointer-events: none;
+}
+
+.achievement::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(245, 180, 35, 0.6), rgba(245, 180, 35, 0) 50%, rgba(245, 180, 35, 0.4));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+}
+
+.achievement.show {
+  animation: achievement-pop 4.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes achievement-pop {
+  0%   { transform: translateX(calc(100% + 2rem)); opacity: 0; }
+  8%   { transform: translateX(-6%); opacity: 1; }
+  14%  { transform: translateX(2%); opacity: 1; }
+  18%  { transform: translateX(0); opacity: 1; }
+  88%  { transform: translateX(0); opacity: 1; }
+  100% { transform: translateX(calc(100% + 2rem)); opacity: 0; }
+}
+
+.achievement-icon {
+  flex: 0 0 auto;
+  width: 48px;
+  height: 48px;
+  border-radius: 10px;
+  background: radial-gradient(circle at 30% 30%, #ffdd6e, #f5b423 55%, #b87a06 100%);
+  display: grid;
+  place-items: center;
+  font-size: 1.7rem;
+  box-shadow:
+    0 0 0 2px rgba(245, 180, 35, 0.3),
+    0 0 18px rgba(245, 180, 35, 0.5);
+  animation: icon-shine 1.6s ease-in-out 0.3s infinite alternate;
+}
+
+@keyframes icon-shine {
+  from { box-shadow: 0 0 0 2px rgba(245, 180, 35, 0.3), 0 0 12px rgba(245, 180, 35, 0.4); }
+  to   { box-shadow: 0 0 0 2px rgba(245, 180, 35, 0.55), 0 0 28px rgba(245, 180, 35, 0.75); }
+}
+
+.achievement-text { flex: 1 1 auto; min-width: 0; }
+
+.achievement-title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #f5b423;
+}
+
+.achievement-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.achievement-xp {
+  flex: 0 0 auto;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #ffdd6e;
+  padding: 0.25rem 0.55rem;
+  border-radius: 999px;
+  background: rgba(245, 180, 35, 0.12);
+  border: 1px solid rgba(245, 180, 35, 0.35);
+}
+
+/* ----- Confetti canvas ----- */
+
+#confetti-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 999;
 }
