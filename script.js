@@ -12,12 +12,11 @@ const ctx = canvas.getContext("2d");
 const PLACEHOLDERS = [
   "I would like to rage!!",
   "Girl, let me spill the tea",
-  "I've got 99 problems and codon optimization ain't one",
+  "I've got 99 problems and optimization ain't one",
   "Why can't I just get what I ordered?!",
-  "Pull up a chair, this is a saga",
-  "Bestie, you won't BELIEVE what happened",
+  "Dishoner! Dishonor on you! Dishonor on your cow! Dishonor on your whole QC department!",
   "Help, I'm losing my mind over primers",
-  "Buckle up, here comes the rant",
+  "Life, uh, finds a way — but why not for my oligos?!",
 ];
 
 const detailsField = form.details;
