@@ -11,24 +11,21 @@ const ctx = canvas.getContext("2d");
 
 const PLACEHOLDERS = [
   "I would like to rage!!",
-  "Girl, let me spill the tea",
   "I've got 99 problems and optimization ain't one",
-  "Why can't I just get what I ordered?!",
   "Dishoner! Dishonor on you! Dishonor on your cow! Dishonor on your whole QC department!",
   "Help, I'm losing my mind over primers",
   "Life, uh, finds a way — but why not for my oligos?!",
+  "Why can't I just get what I ordered?!",
+  "Girl, let me spill the tea",
 ];
 
 const detailsField = form.details;
+let placeholderIndex = 0;
 let placeholderTimer = null;
 
 function rotatePlaceholder() {
-  const current = detailsField.placeholder;
-  let next = current;
-  while (next === current && PLACEHOLDERS.length > 1) {
-    next = PLACEHOLDERS[Math.floor(Math.random() * PLACEHOLDERS.length)];
-  }
-  detailsField.placeholder = next;
+  placeholderIndex = (placeholderIndex + 1) % PLACEHOLDERS.length;
+  detailsField.placeholder = PLACEHOLDERS[placeholderIndex];
 }
 
 function startPlaceholderRotation() {
@@ -41,7 +38,7 @@ function stopPlaceholderRotation() {
   placeholderTimer = null;
 }
 
-detailsField.placeholder = PLACEHOLDERS[Math.floor(Math.random() * PLACEHOLDERS.length)];
+detailsField.placeholder = PLACEHOLDERS[placeholderIndex];
 startPlaceholderRotation();
 
 detailsField.addEventListener("focus", stopPlaceholderRotation);
