@@ -111,14 +111,9 @@ header h1 {
 }
 
 .helix-rung {
-  stroke-width: 3.5;
+  stroke-width: 2.5;
   stroke-linecap: round;
-  opacity: 0.9;
-}
-
-.helix-rung.narrow {
-  stroke-width: 2;
-  opacity: 0.55;
+  opacity: 0.85;
 }
 
 .warning {
