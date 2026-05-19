@@ -7,6 +7,49 @@ const achievement = document.getElementById("achievement");
 const canvas = document.getElementById("confetti-canvas");
 const ctx = canvas.getContext("2d");
 
+/* ---------- Cycling placeholder ---------- */
+
+const PLACEHOLDERS = [
+  "I would like to rage!!",
+  "Girl, let me spill the tea",
+  "I've got 99 problems and codon optimization ain't one",
+  "Why can't I just get what I ordered?!",
+  "Pull up a chair, this is a saga",
+  "Bestie, you won't BELIEVE what happened",
+  "Help, I'm losing my mind over primers",
+  "Buckle up, here comes the rant",
+];
+
+const detailsField = form.details;
+let placeholderTimer = null;
+
+function rotatePlaceholder() {
+  const current = detailsField.placeholder;
+  let next = current;
+  while (next === current && PLACEHOLDERS.length > 1) {
+    next = PLACEHOLDERS[Math.floor(Math.random() * PLACEHOLDERS.length)];
+  }
+  detailsField.placeholder = next;
+}
+
+function startPlaceholderRotation() {
+  if (placeholderTimer || detailsField.value) return;
+  placeholderTimer = setInterval(rotatePlaceholder, 4500);
+}
+
+function stopPlaceholderRotation() {
+  clearInterval(placeholderTimer);
+  placeholderTimer = null;
+}
+
+detailsField.placeholder = PLACEHOLDERS[Math.floor(Math.random() * PLACEHOLDERS.length)];
+startPlaceholderRotation();
+
+detailsField.addEventListener("focus", stopPlaceholderRotation);
+detailsField.addEventListener("blur", () => {
+  if (!detailsField.value) startPlaceholderRotation();
+});
+
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
 
@@ -46,6 +89,7 @@ form.addEventListener("submit", async (event) => {
     }
     setStatus("Thanks — your complaint was submitted.", "success");
     form.reset();
+    startPlaceholderRotation();
     celebrate();
   } catch (err) {
     console.error(err);
