@@ -7,6 +7,35 @@ const achievement = document.getElementById("achievement");
 const canvas = document.getElementById("confetti-canvas");
 const ctx = canvas.getContext("2d");
 
+/* ---------- Visit tracking ---------- */
+
+(function trackVisit() {
+  if (!SUBMISSION_URL) return;
+
+  let sessionId;
+  try {
+    sessionId = sessionStorage.getItem("cao_session");
+    if (!sessionId) {
+      sessionId = Math.random().toString(36).slice(2, 12);
+      sessionStorage.setItem("cao_session", sessionId);
+    }
+  } catch {
+    sessionId = "(no-storage)";
+  }
+
+  fetch(SUBMISSION_URL, {
+    method: "POST",
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: JSON.stringify({
+      type: "visit",
+      sessionId,
+      referrer: document.referrer || "(direct)",
+      userAgent: navigator.userAgent,
+      screen: `${window.screen.width}x${window.screen.height}`,
+    }),
+  }).catch(() => {});
+})();
+
 /* ---------- Cycling placeholder ---------- */
 
 const PLACEHOLDERS = [
