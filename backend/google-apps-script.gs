@@ -3,7 +3,7 @@
 // then deploy as: Web app, Execute as = Me, Who has access = Anyone.
 //
 // Sheet must have a tab named "Submissions" with these header columns in row 1:
-//   A: Timestamp | B: Segment | C: Category | D: Details | E: UserAgent
+//   A: Timestamp | B: Segment | C: Category | D: Details | E: UserAgent | F: Email
 
 const SHEET_NAME = 'Submissions';
 
@@ -20,6 +20,7 @@ function doPost(e) {
     const category = String(data.category || '').slice(0, 200);
     const details = String(data.details || '').slice(0, 5000);
     const userAgent = String(data.userAgent || '').slice(0, 500);
+    const email = String(data.email || '').slice(0, 200);
 
     if (!segment || !category || !details) {
       return json({ ok: false, error: 'Missing required fields' }, 400);
@@ -30,7 +31,7 @@ function doPost(e) {
       return json({ ok: false, error: 'Sheet tab not found' }, 500);
     }
 
-    sheet.appendRow([new Date(), segment, category, details, userAgent]);
+    sheet.appendRow([new Date(), segment, category, details, userAgent, email]);
     return json({ ok: true });
   } catch (err) {
     return json({ ok: false, error: String(err) }, 500);

@@ -199,7 +199,8 @@ label {
 }
 
 select,
-textarea {
+textarea,
+input[type="email"] {
   font: inherit;
   color: var(--text);
   background: var(--surface);
@@ -212,15 +213,25 @@ textarea {
 }
 
 select:hover,
-textarea:hover {
+textarea:hover,
+input[type="email"]:hover {
   border-color: var(--border-strong);
 }
 
 select:focus,
-textarea:focus {
+textarea:focus,
+input[type="email"]:focus {
   outline: none;
   border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(31, 111, 92, 0.18);
+}
+
+.hint {
+  display: block;
+  font-weight: 400;
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin-top: 0.2rem;
 }
 
 textarea {

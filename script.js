@@ -20,6 +20,7 @@ form.addEventListener("submit", async (event) => {
     segment: form.segment.value,
     category: form.category.value,
     details: form.details.value.trim(),
+    email: form.email.value.trim(),
     website: form.website.value,
     userAgent: navigator.userAgent,
   };
